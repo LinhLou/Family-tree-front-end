@@ -1,5 +1,6 @@
 import './sass/boostrap.scss';
 import "bootstrap-icons/font/bootstrap-icons.css";
+
 import {Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Login from './page/login';
 import Signup from './page/signup';

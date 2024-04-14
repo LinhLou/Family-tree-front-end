@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import {clientValidationElement , serverValidationElement, toggleStyleValidation} from '../../scripts/formValidation';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchToken from '../../services/redux/thunk/fetchToken';
+import { Modal } from 'bootstrap';
+import LoginModal from '../modal';
+
 
 
 export default function LoginForm() {
@@ -11,6 +14,7 @@ export default function LoginForm() {
 
 
   const { register, handleSubmit, formState } = useForm();
+  const modalRef = useRef();
   const usernameSectionRef = useRef();
   const passwordSectionRef = useRef();
   const usernameRef = useRef(null);
@@ -47,12 +51,12 @@ export default function LoginForm() {
       const res = await dispatch(fetchToken(data));
       if(!res.error){
         console.log('login successful');
-
+        // navigate to dashboard page
+        //  
 
 
       }else{
         const errorMes = res.error.message;
-
 
         if(errorMes.includes('password')){
           setPasswordErrorMes(errorMes);
@@ -61,10 +65,9 @@ export default function LoginForm() {
           setUsernameErrorMes(errorMes);
           serverValidationElement(usernameRef.current, usernameSectionRef.current);
         }else{
-
-
-
-          console.log(errorMes);
+          //  open a modal
+          const modal = new Modal(modalRef.current);
+          modal.show()
         }
         
       }
@@ -75,51 +78,59 @@ export default function LoginForm() {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
-      <div className='mb-3'>
-        <div className="form-floating " ref = {usernameSectionRef}>
-          <input type="text" name="username" minLength='3' className="form-control " id="floatingUsername" placeholder="username" required {...usernameReg} ref ={(e)=>{
-            usernameReg.ref(e);
-            usernameRef.current=e
-          }} 
-          onChange={(e,ele=usernameSectionRef.current)=>toggleStyleValidation(e,ele)}/>
-          <label htmlFor="floatingUsername" className='d-flex align-items-center'>Username</label>
-        </div>
-        <div className='invalid-feedback mt-1'>{usernameErrorMes}
-        </div>
-      </div>
-
-      <div className='mb-1'>
-        <div className="position-relative" ref={passwordSectionRef}>
-          <div className="form-floating">
-            <input type="password" name="password" className="form-control" id="floatingPassword" placeholder="password" required {...passwordReg} 
-            ref={(e)=>{
-              passwordReg.ref(e); 
-              passwordRef.current = e;
-            }}
-            onChange={(e,ele=passwordSectionRef.current)=>toggleStyleValidation(e,ele)}/>
-            <label htmlFor="floatingPassword" className='d-flex align-items-center'>Password</label>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className='mb-3'>
+          <div className="form-floating " ref = {usernameSectionRef}>
+            <input type="text" name="username" minLength='3' className="form-control " id="floatingUsername" placeholder="username" required {...usernameReg} ref ={(e)=>{
+              usernameReg.ref(e);
+              usernameRef.current=e
+            }} 
+            onChange={(e,ele=usernameSectionRef.current)=>toggleStyleValidation(e,ele)}/>
+            <label htmlFor="floatingUsername" className='d-flex align-items-center'>Username</label>
           </div>
-          <span className="position-absolute top-50 end-0 translate-middle-y" onClick={togglePasswordVisibility} >
-            <i className="bi bi-eye-slash pe-2" ref={eyeRef}></i>
-          </span>
+          <div className='invalid-feedback mt-1'>{usernameErrorMes}
+          </div>
         </div>
-        <div className='invalid-feedback'>{passwordErrorMes}</div>
-      </div>
 
-      <div className='mb-3'>             
-        <a href="#" className='link-primary fs-6'><small>Forget password?</small></a>
-      </div>
-      
-      <div className="d-grid mb-3">
-        <button type="submit" className='btn btn-primary '>Log in</button>
-      </div>
+        <div className='mb-1'>
+          <div className="position-relative" ref={passwordSectionRef}>
+            <div className="form-floating">
+              <input type="password" name="password" className="form-control" id="floatingPassword" placeholder="password" required {...passwordReg} 
+              ref={(e)=>{
+                passwordReg.ref(e); 
+                passwordRef.current = e;
+              }}
+              onChange={(e,ele=passwordSectionRef.current)=>toggleStyleValidation(e,ele)}/>
+              <label htmlFor="floatingPassword" className='d-flex align-items-center'>Password</label>
+            </div>
+            <span className="position-absolute top-50 end-0 translate-middle-y" onClick={togglePasswordVisibility} >
+              <i className="bi bi-eye-slash pe-2" ref={eyeRef}></i>
+            </span>
+          </div>
+          <div className='invalid-feedback'>{passwordErrorMes}</div>
+        </div>
 
-      <div className="d-flex  justify-content-between">
-        <small>You don't have account yet? </small>
-        <a href="#" className='link-primary fs-6'><small>Create account</small></a>
-      </div>
-    </form>
+        <div className='mb-3'>             
+          <a href="#" className='link-primary fs-6'><small>Forget password?</small></a>
+        </div>
+        
+        <div className="d-grid mb-3">
+          <button type="submit" className='btn btn-primary '>Log in</button>
+        </div>
+
+        <div className="d-flex  justify-content-between">
+          <small>You don't have account yet? </small>
+          <a href="#" className='link-primary fs-6'><small>Create account</small></a>
+        </div>
+      </form>
+      <LoginModal ref={modalRef}>
+        <div className='fs-5 text-center'>
+        Server connection error. <br />
+        Please try again later!
+        </div>
+      </LoginModal>
+
+    </>
   )
 }
