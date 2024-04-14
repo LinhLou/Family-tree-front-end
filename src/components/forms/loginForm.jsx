@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {clientValidationElement , serverValidationElement, toggleStyleValidation} from '../../scripts/formValidation';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,8 +10,10 @@ import LoginModal from '../modal';
 
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.login);
+
 
 
   const { register, handleSubmit, formState } = useForm();
@@ -53,17 +56,15 @@ export default function LoginForm() {
       const res = await dispatch(fetchToken(data));
       if(!res.error){
         console.log('login successful');
-        // navigate to dashboard page
-        //  
-
-
+        navigate("/dashboard");
       }else{
         const errorMes = res.error.message;
+        console.log(errorMes)
 
-        if(errorMes.includes('password')){
+        if(errorMes.includes('Password')){
           setPasswordErrorMes(errorMes);
           serverValidationElement(passwordRef.current,passwordSectionRef.current);
-        }else if(errorMes.includes('username')){
+        }else if(errorMes.includes('Username')){
           setUsernameErrorMes(errorMes);
           serverValidationElement(usernameRef.current, usernameSectionRef.current);
         }else{
