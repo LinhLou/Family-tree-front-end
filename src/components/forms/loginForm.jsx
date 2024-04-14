@@ -25,6 +25,8 @@ export default function LoginForm() {
   const [ passwordErrorMes, setPasswordErrorMes ] = useState('');
   const [ usernameErrorMes, setUsernameErrorMes ] = useState('');
 
+  const { isSubmitting } = formState;
+
   function togglePasswordVisibility(){
     eyeRef.current.classList.toggle('bi-eye');
     if(eyeRef.current.classList.contains('bi-eye')){
@@ -67,11 +69,9 @@ export default function LoginForm() {
         }else{
           //  open a modal
           const modal = new Modal(modalRef.current);
-          modal.show()
+          modal.show();
         }
-        
       }
-
     }
 
   }
@@ -116,7 +116,9 @@ export default function LoginForm() {
         </div>
         
         <div className="d-grid mb-3">
-          <button type="submit" className='btn btn-primary '>Log in</button>
+          <button disabled={isSubmitting} type="submit" className='btn btn-primary '>
+            {isSubmitting ? 'Logging in':'Log in'}
+          </button>
         </div>
 
         <div className="d-flex  justify-content-between">
