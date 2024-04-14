@@ -22,17 +22,18 @@ export function clientValidationElement(checkedEle, targetedEle) {
   if (!checkedEle.checkValidity()) {
     isInvalid(checkedEle);
     isInvalid(targetedEle);
-    return false
+    return false;
   } else {
     isValid(checkedEle);
     isValid(targetedEle);
-    return true
+    return true;
   }
 }
 
 
 
 export function toggleStyleValidation(e, targetedEle) {
+  //  check validation constantly when chaning input value 
   const eleClassList = targetedEle.classList;
   const checkedEle = e.target;
   if (eleClassList.contains('is-invalid') || eleClassList.contains('is-valid')) {
@@ -40,7 +41,7 @@ export function toggleStyleValidation(e, targetedEle) {
   }
 }
 
-export function serverValidationElement(checkedEle,targetedEle){
+export function serverValidationElement(checkedEle, targetedEle) {
   isInvalid(checkedEle);
   isInvalid(targetedEle);
 }

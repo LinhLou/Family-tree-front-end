@@ -1,10 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from "react-hook-form";
-import checkValidationElement,{toggleStyleValidation} from './scripts/formValidation';
-import UserService from '../../services/userService';
+import {clientValidationElement , serverValidationElement, toggleStyleValidation} from '../../scripts/formValidation';
+import { useSelector, useDispatch } from 'react-redux';
+import fetchToken from '../../services/redux/thunk/fetchToken';
 
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.login);
+
+
   const { register, handleSubmit, formState } = useForm();
   const usernameSectionRef = useRef();
   const passwordSectionRef = useRef();
@@ -13,6 +18,8 @@ export default function LoginForm() {
   const passwordRef = useRef(null);
   const usernameReg = register('username');
   const passwordReg = register('password');
+  const [ passwordErrorMes, setPasswordErrorMes ] = useState('');
+  const [ usernameErrorMes, setUsernameErrorMes ] = useState('');
 
   function togglePasswordVisibility(){
     eyeRef.current.classList.toggle('bi-eye');
@@ -23,7 +30,6 @@ export default function LoginForm() {
     }
   }
 
-  
 
   
   async function onSubmit(data,e){
@@ -31,31 +37,38 @@ export default function LoginForm() {
     eyeRef.current.classList.add('pe-5');
 
     //  client side validation
-    checkValidationElement(usernameRef,usernameSectionRef);
-    checkValidationElement(passwordRef,passwordSectionRef);
-    e.target.classList.add('was-validated');
-
-    console.log(data)
-    console.log(JSON.stringify(data))
+    setPasswordErrorMes('Invalid password');
+    setUsernameErrorMes('Invalid username');
+    clientValidationElement(usernameRef.current,usernameSectionRef.current);
+    clientValidationElement(passwordRef.current,passwordSectionRef.current);
 
     // server side validation
     if(e.target.checkValidity()){
-      const user = new UserService('mockApiSuccess');
-      try {
+      const res = await dispatch(fetchToken(data));
+      if(!res.error){
+        console.log('login successful');
 
-        const token = await user.loginUser(data);
-        console.log(token);
 
-      } catch (error) {
-        if(error.name=='TypeError'){
-          const errorMessage = error.message;
-          // console.log(errorMessage);
-          console.error('server problem');
-          console.log(error)
+
+      }else{
+        const errorMes = res.error.message;
+
+
+        if(errorMes.includes('password')){
+          setPasswordErrorMes(errorMes);
+          serverValidationElement(passwordRef.current,passwordSectionRef.current);
+        }else if(errorMes.includes('username')){
+          setUsernameErrorMes(errorMes);
+          serverValidationElement(usernameRef.current, usernameSectionRef.current);
         }else{
-          console.log(error.message)
+
+
+
+          console.log(errorMes);
         }
+        
       }
+
     }
 
   }
@@ -70,10 +83,10 @@ export default function LoginForm() {
             usernameReg.ref(e);
             usernameRef.current=e
           }} 
-          onChange={(e,ele=usernameSectionRef)=>toggleStyleValidation(e,ele)}/>
+          onChange={(e,ele=usernameSectionRef.current)=>toggleStyleValidation(e,ele)}/>
           <label htmlFor="floatingUsername" className='d-flex align-items-center'>Username</label>
         </div>
-        <div className='invalid-feedback mt-1'>Invalid username
+        <div className='invalid-feedback mt-1'>{usernameErrorMes}
         </div>
       </div>
 
@@ -85,14 +98,14 @@ export default function LoginForm() {
               passwordReg.ref(e); 
               passwordRef.current = e;
             }}
-            onChange={(e,ele=passwordSectionRef)=>toggleStyleValidation(e,ele)}/>
+            onChange={(e,ele=passwordSectionRef.current)=>toggleStyleValidation(e,ele)}/>
             <label htmlFor="floatingPassword" className='d-flex align-items-center'>Password</label>
           </div>
           <span className="position-absolute top-50 end-0 translate-middle-y" onClick={togglePasswordVisibility} >
             <i className="bi bi-eye-slash pe-2" ref={eyeRef}></i>
           </span>
         </div>
-        <div className='invalid-feedback'>Invalid Password</div>
+        <div className='invalid-feedback'>{passwordErrorMes}</div>
       </div>
 
       <div className='mb-3'>             
