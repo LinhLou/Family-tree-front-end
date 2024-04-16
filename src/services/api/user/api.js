@@ -1,3 +1,5 @@
+
+
 async function jsonOrThrowError(res){
   if(!res.ok){
     throw new Error((await res.json()).message)
@@ -5,12 +7,10 @@ async function jsonOrThrowError(res){
   return await res.json();
 }
 
+const baseURL = "http://localhost:4000/api/v1/user";
+
 
 class APIUser{
-  constructor(baseURL){
-    this.baseURL = baseURL;
-  }
-
   async loginUser(data){
 
     try {

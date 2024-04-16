@@ -1,6 +1,6 @@
-import APIUser from "./api/api";
-import mockAPISuccess from "./api/mockAPISuccess";
-import mockAPIFail from "./api/mockAPIFailed";
+import APIUser from "./api/user/api";
+import mockAPISuccess from "./api/user/mockAPISuccess";
+import mockAPIFail from "./api/user/mockAPIFailed";
 
 
 const baseURL = "http://localhost:4000/api/v1/user";
