@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import LoginForm from '../components/forms/loginForm.jsx';
-import FormInput from '../components/forms/FormInput.jsx';
+// import LoginForm from '../components/forms/loginForm.jsx';
+// import FormInput from '../components/forms/FormInput.jsx';
+import PasswordInput from '../features/Authentification/components/PasswordInput.jsx';
 
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -32,7 +33,7 @@ export default function Login() {
         <div className='col-sm-8 col-md-6 col-lg-4'>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-            <FormInput {...{type:'text', name:'test', id:'testId', label:'Test', required:'it is required', validate:{
+            <PasswordInput {...{type:'text', name:'test', id:'testId', label:'Test', required:'it is required', validate:{
               isNumber: v => typeof(v)==='string' || 'it must be a number',
               lessThanFive: v=> parseInt(v)<5 || 'it must be smaller than 5',
               greaterThanTwo: v=>parseInt(v)>2 || 'it must be greater than two'
