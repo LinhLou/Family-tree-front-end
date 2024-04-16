@@ -22,7 +22,7 @@ export default function PasswordInput(props) {
         <div className="position-relative is-invalid" >
           <div className="form-floating" >
             <input type="password" className={ `form-control ${!submitCount? '': errors[props.name]? ' is-invalid':' is-valid'} `} id={props.id} placeholder={props.name} {...register(props.name,{
-              required:props.required,
+              ...props.contraints,
               validate:props.validate
             })} ref={(e)=>{ref(e); passwordRef.current = e}}/>
             <label htmlFor={props.id} className='d-flex align-items-center'>{props.label}</label>

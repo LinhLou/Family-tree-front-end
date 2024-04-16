@@ -9,7 +9,7 @@ export default function FormInput(props) {
       <>
         <div className="form-floating is-invalid" >
           <input type={props.type} className={ `form-control ${!submitCount? '': errors[props.name]? ' is-invalid':' is-valid'} `} id={props.id} placeholder={props.name} {...register(props.name,{
-            required:props.required,
+            ...props.contraints,
             validate:props.validate
           })}/>
           <label htmlFor={props.id} className='d-flex align-items-center'>{props.label}</label>
