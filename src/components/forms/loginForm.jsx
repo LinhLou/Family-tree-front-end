@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import FormInput from './FormInput';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {clientValidationElement , serverValidationElement, toggleStyleValidation} from '../../scripts/formValidation';
@@ -78,10 +79,10 @@ export default function LoginForm() {
 
   }
 
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+
         <div className='mb-3'>
           <div className="form-floating " ref = {usernameSectionRef}>
             <input type="text" name="username" minLength='3' className="form-control " id="floatingUsername" placeholder="username" required {...usernameReg} ref ={(e)=>{

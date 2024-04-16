@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import UserService from '../../userService';
 
-const user = new UserService('mockApiSuccess');
+const user = new UserService('mockApiFail');
 
 const fetchToken = createAsyncThunk(
   'login/fetchToken',
