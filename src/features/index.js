@@ -1,0 +1,1 @@
+export { fetchToken } from './Authentification/redux/thunk/fetchToken';

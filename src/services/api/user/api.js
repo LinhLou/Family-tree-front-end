@@ -1,5 +1,4 @@
 
-
 async function jsonOrThrowError(res){
   if(!res.ok){
     throw new Error((await res.json()).message)
@@ -10,11 +9,10 @@ async function jsonOrThrowError(res){
 const baseURL = "http://localhost:4000/api/v1/user";
 
 
-class APIUser{
+class UserAPI{
   async loginUser(data){
-
     try {
-      const res = await jsonOrThrowError(await fetch(`${this.baseURL}/login`,{
+      const res = await jsonOrThrowError(await fetch(`${baseURL}/login`,{
         method: "POST",
         headers:{
           "Content-Type":"application/json"
@@ -29,6 +27,24 @@ class APIUser{
     }
   }
 
+  async signupUser(data){
+    try {
+      const res = await jsonOrThrowError(await fetch(`${baseURL}`,{
+        method: "POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+      }))
+
+      const message = await res.message
+      return message
+      
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
 }
 
-export default APIUser
+export default UserAPI

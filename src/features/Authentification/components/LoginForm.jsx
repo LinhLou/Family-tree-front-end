@@ -12,8 +12,6 @@ export default function LoginForm() {
     console.log(data);
 
   }
-
-
   
   return (
     <FormProvider {...methods}>
@@ -32,7 +30,7 @@ export default function LoginForm() {
         <div className='mb-3'>
           <PasswordInput {...{name:"password", label:"password", id:"idPassword",
             contraints:{
-              required:"Invalid password"
+              required:"Password is required"
             },
             validate:{
               fiveCharacterMinimum:(v)=>v.length>=5|| "Password must contain at least 5 characters"
@@ -44,7 +42,7 @@ export default function LoginForm() {
         </div>
         <div className="d-grid">
           <ButtonSubmit disabled={isSubmitting}>
-            {isSubmitting ? 'Logging in':'Log in'}
+            {isSubmitting ? 'Loading':'Log in'}
           </ButtonSubmit>
         </div>
       </form>
