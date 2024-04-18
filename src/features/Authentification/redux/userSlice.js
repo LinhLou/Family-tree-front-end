@@ -1,9 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchToken, singup } from "./thunk/fetchToken";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import login from "../services/login";
 
+const initialState = {
+  isLogin: false,
+  token:'',
+  profile:{
 
+  }
+};
+export const fetchToken = createAsyncThunk(
+  "user/fetchToken",
+  login
+)
 
-const initialState = {}
 
 export const userSlice = createSlice({
   name: 'user',
@@ -19,3 +28,6 @@ export const userSlice = createSlice({
       })
   },
 });
+
+
+export default userSlice.reducer
