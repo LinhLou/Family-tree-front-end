@@ -1,11 +1,11 @@
 import React,{ useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import FormInput from '../../../components/Form/FormInput';
 import PasswordInput from './PasswordInput';
 import ButtonSubmit from '../../../components/Form/ButtonSubmit';
 import signup from '../services/signup';
 import SignupModal from '../../../components/UI/modal';
+import ModalServerError from '../../../components/UI/modalServerError';
 import { Modal } from 'bootstrap';
 import LinkToLogin from '../../../components/UI/link';
 
@@ -86,12 +86,7 @@ export default function SignupForm() {
           </div>
         </form>
       </FormProvider>
-      <SignupModal ref={modalFailRef}>
-        <div className='fs-5 text-center'>
-          Server connection error! <br />
-          Please try again later!
-        </div>
-      </SignupModal>
+      <ModalServerError ref={modalFailRef} />
       <SignupModal ref={modalSuccessRef}>
         <div className='fs-5 text-center'>
           Your account has been successfully created! <br />

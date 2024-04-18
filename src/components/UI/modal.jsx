@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 
 
-const Modal = forwardRef(function Modal({children}, ref){
+function Modal({children}, ref){
   return (
     <div className="modal" tabIndex="-1" ref={ref} >
         <div className="modal-dialog">
@@ -19,6 +19,6 @@ const Modal = forwardRef(function Modal({children}, ref){
         </div>
       </div>
   )
-})
+}
 
-export default Modal
+export default forwardRef(Modal)
