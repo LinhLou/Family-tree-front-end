@@ -1,4 +1,4 @@
-import './sass/boostrap.scss';
+import './assets/scss/customizeBootstrap.scss';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import {Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';

@@ -2,13 +2,13 @@ const mockAPI = {
   loginUser: async function () {
     return await Promise.reject({
       "status": 400,
-      "message": "Password is invalid!"
+      "message": "password is invalid!"
     })
   },
   signupUser: async function(){
     return await Promise.reject({
       "status": 400,
-      "message": "Password is invalid!"
+      "message": "password is invalid!"
     })
   }
 };

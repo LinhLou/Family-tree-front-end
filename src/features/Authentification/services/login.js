@@ -1,3 +1,12 @@
-import UserService from "../../../services/api/user/service";
+import service from "./api";
 
-const user = new UserService('mockApiFail');
+async function login(data) {
+  try {
+    const token = await service.loginUser(data);
+    return token
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export default login
