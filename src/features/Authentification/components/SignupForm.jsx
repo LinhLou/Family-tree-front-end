@@ -1,40 +1,41 @@
 import React,{ useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import FormInput from '../../../components/Form/FormInput';
 import PasswordInput from './PasswordInput';
 import ButtonSubmit from '../../../components/Form/ButtonSubmit';
 import signup from '../services/signup';
-import SigupModal from '../../../components/UI/modal';
+import SignupModal from '../../../components/UI/modal';
 import { Modal } from 'bootstrap';
 import LinkToLogin from '../../../components/UI/link';
 
 
-
 export default function SignupForm() {
-  const modalRef = useRef();
+  const modalSuccessRef = useRef();
+  const modalFailRef = useRef();
   const methods = useForm();
   const { isSubmitting } = methods.formState;
 
   async function onSubmit(data){
     try {
       await signup(data);
-      const modal = new Modal(modalRef.current);
+      const modal = new Modal(modalSuccessRef.current);
       modal.show();
     } catch (error) {
       if(error.message.includes('email')){
         methods.setError('email',{
           message:'This email is aldready registered!'
         });
-
       }else if(error.message.includes('username')){
         methods.setError('username',{
           message:'This username is aldready registered!'
         })
+      }else{
+        const modal = new Modal(modalFailRef.current);
+        modal.show();
       }
-      console.log(error.status)
     }
   }
-
 
   return (
     <>
@@ -85,12 +86,20 @@ export default function SignupForm() {
           </div>
         </form>
       </FormProvider>
-      <SigupModal ref={modalRef}>
+      <SignupModal ref={modalFailRef}>
         <div className='fs-5 text-center'>
-        Your account has been successfully created!<br />
-        <LinkToLogin path='/login'><p className='bg-transparent' data-bs-dismiss="modal">Log in</p></LinkToLogin>
+          Server connection error! <br />
+          Please try again later!
         </div>
-      </SigupModal>
+      </SignupModal>
+      <SignupModal ref={modalSuccessRef}>
+        <div className='fs-5 text-center'>
+          Your account has been successfully created! <br />
+          <LinkToLogin path="/login"> 
+          <p data-bs-dismiss="modal">Log in</p>
+          </LinkToLogin>
+        </div>
+      </SignupModal>
     </>
   )
 }

@@ -1,13 +1,10 @@
-import UserService from "../../../services/api/user/service";
-
-const user = new UserService('');
+import service from "./api";
 
 async function signup(data){
   try {
-    const res = await user.signupUser(data);
+    const res = await service.signupUser(data);
     return res
   } catch (error) {
-    console.log(error)
     throw new Error(error.message)
   }
 }
