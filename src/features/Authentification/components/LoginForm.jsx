@@ -1,51 +1,74 @@
-import React from 'react';
+import React,{useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import FormInput from '../../../components/Form/FormInput';
 import PasswordInput from './PasswordInput';
-import ButtonSubmit from '../../../components/Form/ButtonSubmit'
+import ButtonSubmit from '../../../components/Form/ButtonSubmit';
+import { Modal } from 'bootstrap';
+import ModalServerError from '../../../components/UI/modalServerError';
+import { fetchToken } from '../redux/userSlice';
+import { useDispatch } from 'react-redux';
 
 export default function LoginForm() {
+  const modalRef = useRef();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const methods = useForm();
   const { isSubmitting } = methods.formState;
   
-  function onSubmit(data){
-    console.log(data);
+  async function onSubmit(data){
+    try {
+      const res = await dispatch(fetchToken(data));
+      if(res.error){
+        throw new Error(res.error.message);
+      }
+      navigate('/dashboard');
+    } catch (error) {
+      if(error.message.includes('username')){
+        methods.setError('username',{
+          message:'username is incorrect'
+        })
+      }else if(error.message.includes('password')){
+        methods.setError('password',{
+          message:"password is incorrect"
+        })
+      }else{
+        const modal = new Modal(modalRef.current);
+        modal.show();
+      }
+    }
 
   }
   
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-        <div className='mb-3'>
-          <FormInput {...{type:'email', name:'email', label:"email", id:"idEmail",
-            contraints:{
-              required:"Email is required",
-              pattern:{
-                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                message:'Invalid email'
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+          <div className='mb-3'>
+            <FormInput {...{type:'text', name:'username', label:"username", id:"idUsername",
+              contraints:{
+                required:"user is required"
               }
-            }
+              }}/>
+          </div>
+          <div className='mb-3'>
+            <PasswordInput {...{name:"password", label:"password", id:"idPassword",
+              contraints:{
+                required:"password is required"
+              }
             }}/>
-        </div>
-        <div className='mb-3'>
-          <PasswordInput {...{name:"password", label:"password", id:"idPassword",
-            contraints:{
-              required:"Password is required"
-            },
-            validate:{
-              fiveCharacterMinimum:(v)=>v.length>=5|| "Password must contain at least 5 characters"
-            }
-          }}/>
-        </div>
-        <div className='mb-3'>             
-          <a href="#" className='link-primary fs-6'><small>Forget password?</small></a>
-        </div>
-        <div className="d-grid">
-          <ButtonSubmit disabled={isSubmitting}>
-            {isSubmitting ? 'Loading':'Log in'}
-          </ButtonSubmit>
-        </div>
-      </form>
-    </FormProvider>
+          </div>
+          <div className='mb-3'>             
+            <a href="#" className='link-primary fs-6'><small>Forget password?</small></a>
+          </div>
+          <div className="d-grid">
+            <ButtonSubmit disabled={isSubmitting}>
+              {isSubmitting ? 'Loading':'Log in'}
+            </ButtonSubmit>
+          </div>
+        </form>
+      </FormProvider>
+      <ModalServerError ref={modalRef}/>
+    </>
   )
 }
