@@ -1,6 +1,6 @@
-import UserAPI from "./api";
-import mockSuccessAPI from "./mockAPISuccess";
-import mockFailedAPI from "./mockAPIFailed";
+import UserApi from "./api";
+import mockApiSuccess from "./mockAPISuccess";
+import mockApiFail from "./mockAPIFailed";
 
 
 class UserService{
@@ -10,11 +10,11 @@ class UserService{
   async loginUser(data){
     switch(this.resource){
       case "mockApiSuccess":
-        return await mockSuccessAPI.loginUser();
+        return await mockApiSuccess.loginUser();
       case "mockApiFail":
-        return await mockFailedAPI.loginUser();
+        return await mockApiFail.loginUser();
       default:
-        const user = new UserAPI();
+        const user = new UserApi();
         return await user.loginUser(data);
     }
 
@@ -22,11 +22,11 @@ class UserService{
   async signupUser(data){
     switch(this.resource){
       case "mockApiSuccess":
-        return await mockSuccessAPI.signupUser();
+        return await mockApiSuccess.signupUser();
       case "mockApiFail":
-        return await mockFailedAPI.signupUser();
+        return await mockApiFail.signupUser();
       default:
-        const user = new UserAPI();
+        const user = new UserApi();
         return await user.signupUser(data);
     }
   }
