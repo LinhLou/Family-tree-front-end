@@ -10,6 +10,12 @@ const mockAPI = {
       "status": 400,
       "message": "password is invalid!"
     })
+  },
+  getUserProfile: async function(){
+    return await Promise.reject({
+      "status": 400,
+      "message": "string"
+    })
   }
 };
 

@@ -1,7 +1,6 @@
 import UserService from "../../../services/api/user/service";
+import { resource } from "../../../data/constant";
 
-const service = new UserService('mockApiSuccess'); 
-// mockApiSuccess
-// mockApiFail
+const service = new UserService(resource); 
 
 export default service;
