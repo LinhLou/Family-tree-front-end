@@ -8,7 +8,6 @@ import Signup from '../page/signup';
 import Home from '../page/home';
 import Dashboard from '../page/dashboard';
 import Error from '../page/error';
-import { fetchUserProfile } from '../features/Authentification';
 
 
 const router = createBrowserRouter(
@@ -21,7 +20,6 @@ const router = createBrowserRouter(
       </Route>
       <Route element={<LayoutUser/> }>
         <Route path="/dashboard" 
-          loader={fetchUserProfile}
           element={<Dashboard />} />
       </Route>
 

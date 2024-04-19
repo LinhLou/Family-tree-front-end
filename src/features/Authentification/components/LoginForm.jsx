@@ -6,7 +6,7 @@ import PasswordInput from './PasswordInput';
 import ButtonSubmit from '../../../components/Form/ButtonSubmit';
 import { Modal } from 'bootstrap';
 import ModalServerError from '../../../components/UI/modalServerError';
-import { fetchToken } from '../redux/userSlice';
+import { fetchUserProfile } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
 
 export default function LoginForm() {
@@ -18,7 +18,7 @@ export default function LoginForm() {
   
   async function onSubmit(data){
     try {
-      const res = await dispatch(fetchToken(data));
+      const res = await dispatch(fetchUserProfile(data));
       if(res.error){
         throw new Error(res.error.message);
       }
