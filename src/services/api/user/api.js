@@ -6,7 +6,7 @@ async function jsonOrThrowError(res){
   return await res.json();
 }
 
-const baseURL = "http://localhost:4000/api/v1/user";
+const baseURL = process.env.API_URL || "http://localhost:4000/api/v1/user";
 
 
 class UserAPI{
@@ -41,6 +41,23 @@ class UserAPI{
       return message
       
     } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+  async getUserProfile(token){
+    try {
+      const res = await jsonOrThrowError(await fetch(`${baseURL}`,{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      }));
+      const profile = await res.body
+      return profile
+    } catch (error) {
+      console.log(error)
       throw new Error(error.message)
     }
   }
