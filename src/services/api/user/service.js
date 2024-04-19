@@ -42,6 +42,18 @@ class UserService{
         return await user.getUserProfile(token);
     }
   }
+
+  async verifyEmail(data){
+    switch(this.resource){
+      case "mockApiSuccess":
+        return await mockApiSuccess.verifyEmail();
+      case "mockApiFail":
+        return await mockApiFail.verifyEmail();
+      default:
+        const user = new UserApi();
+        return await user.verifyEmail(data);
+    }
+  }
 }
 
 export default UserService

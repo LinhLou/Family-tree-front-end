@@ -16,6 +16,12 @@ const mockAPI = {
       "createdAt": "2024-04-01T12:15:10.716Z",
       "updatedAt": "2024-04-01T12:15:10.716Z"
     })
+  },
+  verifyEmail: async function(){
+    return await Promise.resolve({
+      "status": 200,
+      "message": "send mail problem"
+    })
   }
 }
 

@@ -16,6 +16,12 @@ const mockAPI = {
       "status": 400,
       "message": "string"
     })
+  },
+  verifyEmail: async function(){
+    return await Promise.reject({
+      "status": 400,
+      "message": "send mail problem"
+    })
   }
 };
 
