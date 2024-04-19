@@ -1,6 +1,7 @@
 import React,{useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
+import LinkToResetPassword from '../../../components/UI/link';
 import FormInput from '../../../components/Form/FormInput';
 import PasswordInput from './PasswordInput';
 import ButtonSubmit from '../../../components/Form/ButtonSubmit';
@@ -59,7 +60,7 @@ export default function LoginForm() {
             }}/>
           </div>
           <div className='mb-3'>             
-            <a href="#" className='link-primary fs-6'><small>Forget password?</small></a>
+            <LinkToResetPassword path={"/resetPassword"}><small>Forget password?</small></LinkToResetPassword>
           </div>
           <div className="d-grid">
             <ButtonSubmit disabled={isSubmitting}>

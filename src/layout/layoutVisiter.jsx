@@ -1,7 +1,9 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { resetStore } from '../services/redux/resetStore';
 
 export default function Layout() {
+  resetStore()
   return (
     <>
       <nav className="navbar bg-body-tertiary">

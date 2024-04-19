@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from '../features/Authentification/components/LoginForm';
-import { resetStore } from '../services/redux/resetStore';
-
 
 
 export default function Login() {
 
-  resetStore();
   return (
     <div className='container'>
       <div className='row justify-content-center mt-5'>
