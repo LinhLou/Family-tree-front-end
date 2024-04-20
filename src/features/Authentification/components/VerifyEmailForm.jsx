@@ -7,6 +7,7 @@ import ModalSuccess from '../../../components/UI/modal';
 import { useForm,FormProvider } from 'react-hook-form';
 import verifyEmail from '../services/verifyEmail';
 
+
 export default function VerifyEmailForm() {
   const modalServerErrorRef = useRef();
   const modalSuccesRef = useRef();
@@ -15,6 +16,8 @@ export default function VerifyEmailForm() {
   async function onSubmit(data){
     try {
       const res = await verifyEmail(data);
+      const modal = new Modal(modalSuccesRef.current);
+      modal.show();
     } catch (error) {
       if(error.message==='email is inexist!'){
         methods.setError('email',{
@@ -24,9 +27,7 @@ export default function VerifyEmailForm() {
         const modal = new Modal(modalServerErrorRef.current);
         modal.show();
       }
-
     }
-
   }
   
   return (

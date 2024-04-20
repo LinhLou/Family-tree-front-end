@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignupForm from '../features/Authentification/components/SignupForm';
+import { SignupForm } from '../features/Authentification';
 
 
 export default function Signup() {

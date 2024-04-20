@@ -1,3 +1,6 @@
-export { default as UserReducer} from "./redux/userSlice";
-export { initUser } from "./redux/userSlice";
-export { default as VerifyEmailForm } from "./components/VerifyEmailForm";
+export { default as UserReducer} from "./redux/userSlice"
+export { initUser } from "./redux/userSlice"
+export { default as VerifyEmailForm } from "./components/VerifyEmailForm"
+export { default as ResetPasswordForm } from "./components/ResetPasswordForm"
+export { default as LoginForm } from "./components/LoginForm"
+export { default as SignupForm } from "./components/SignupForm"

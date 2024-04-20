@@ -60,7 +60,7 @@ export default function LoginForm() {
             }}/>
           </div>
           <div className='mb-3'>             
-            <LinkToResetPassword path={"/verifyEmail"}><small>Forget password?</small></LinkToResetPassword>
+            <LinkToResetPassword path={"/verify-email"}><small>Forget password?</small></LinkToResetPassword>
           </div>
           <div className="d-grid">
             <ButtonSubmit disabled={isSubmitting}>
