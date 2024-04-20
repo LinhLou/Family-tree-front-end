@@ -20,7 +20,13 @@ const mockAPI = {
   verifyEmail: async function(){
     return await Promise.resolve({
       "status": 200,
-      "message": "send mail problem"
+      "message": "operation successful"
+    })
+  },
+  resetPassword: async function(){
+    return await Promise.resolve({
+      "status": 200,
+      "message": "operation successful"
     })
   }
 }

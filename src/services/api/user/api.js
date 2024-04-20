@@ -77,6 +77,22 @@ class UserAPI{
     } 
   } 
 
+  async resetPassword(data){
+    try {
+      const res = await jsonOrThrowError(await fetch(`${baseURL}/reset-password`,{
+        method: "PUT",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `Bearer ${data.token}`
+        },
+        body: JSON.stringify(data)
+      }))
+      return res
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
 }
 
 export default UserAPI

@@ -1,16 +1,18 @@
 import React from 'react';
-import FormInput from '../components/Form/FormInput';
-import ButtonSumit from '../components/Form/ButtonSubmit';
-import { FormProvider } from 'react-hook-form';
+import { ResetPasswordForm } from '../features/Authentification';
+import { useParams } from 'react-router-dom';
 
 
 export default function ResetPassword() {
-  
-  return (
-    <div>
-      <div>Reset your password</div>
+  let { token } = useParams();
 
-      <form action=""></form>
+  return (
+    <div className='container'>
+      <div className='row justify-content-center mt-5'>
+        <div className='col-sm-8 col-md-6 col-lg-4'>
+          <ResetPasswordForm token={token}/>
+        </div>
+      </div>
     </div>
   )
 }

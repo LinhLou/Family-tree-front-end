@@ -16,11 +16,12 @@ import loaderProfile from './loaders/loaderProfile';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route >
-      <Route element={<LayoutVisiter />}>
+      <Route element={<LayoutVisiter/>}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Route>
       <Route element={<LayoutUser/> }>
         <Route path="/dashboard" 

@@ -54,6 +54,18 @@ class UserService{
         return await user.verifyEmail(data);
     }
   }
+
+  async resetPassword(data){
+    switch(this.resource){
+      case "mockApiSuccess":
+        return await mockApiSuccess.resetPassword();
+      case "mockApiFail":
+        return await mockApiFail.resetPassword();
+      default:
+        const user = new UserApi();
+        return await user.resetPassword(data);
+    }
+  }
 }
 
 export default UserService

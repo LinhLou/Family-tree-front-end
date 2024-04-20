@@ -22,6 +22,12 @@ const mockAPI = {
       "status": 400,
       "message": "send mail problem"
     })
+  },
+  resetPassword: async function(){
+    return await Promise.reject({
+      "status": 400,
+      "message": "operation failed"
+    })
   }
 };
 
