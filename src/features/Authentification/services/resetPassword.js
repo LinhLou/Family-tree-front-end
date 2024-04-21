@@ -1,12 +1,12 @@
-import service from "./api";
+import user from "../../../services/api/apiUser";
 
-async function resetPassword(data){
+async function resetPassword(data) {
   try {
-    const res =  await service.resetPassword(data);
-    return res
+    const res = await user.resetPassword(data);
+    return res;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 }
 
-export default resetPassword
+export default resetPassword;

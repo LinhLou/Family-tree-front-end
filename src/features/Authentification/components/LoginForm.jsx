@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React,{ useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import LinkToResetPassword from '../../../components/UI/link';
@@ -48,12 +48,12 @@ export default function LoginForm() {
           <div className='mb-3'>
             <FormInput {...{type:'text', name:'username', label:"username", id:"idUsername",
               contraints:{
-                required:"user is required"
+                required:"username is required"
               }
               }}/>
           </div>
           <div className='mb-3'>
-            <PasswordInput {...{name:"password", label:"password", id:"idPassword",
+            <PasswordInput {...{name:"password", label:"password", id:"idPassword", testid:'passwordTest',
               contraints:{
                 required:"password is required"
               }

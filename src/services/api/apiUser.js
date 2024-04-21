@@ -95,4 +95,4 @@ class UserAPI{
 
 }
 
-export default UserAPI
+export default new UserAPI()

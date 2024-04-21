@@ -1,12 +1,12 @@
-import service from "./api";
+import user from "../../../services/api/apiUser";
 
-async function verifyEmail(data){
+async function verifyEmail(data) {
   try {
-    const res = await service.verifyEmail(data);
-    return res
+    const res = await user.verifyEmail(data);
+    return res;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 }
 
-export default verifyEmail
+export default verifyEmail;

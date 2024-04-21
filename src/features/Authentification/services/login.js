@@ -1,12 +1,12 @@
-import service from "./api";
+import user from "../../../services/api/apiUser";
 
 async function login(data) {
   try {
-    const token = await service.loginUser(data);
-    return token
+    const token = await user.loginUser(data);
+    return token;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-export default login
+export default login;

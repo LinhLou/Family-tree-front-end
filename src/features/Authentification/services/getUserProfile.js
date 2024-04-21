@@ -1,12 +1,12 @@
-import service from "./api";
+import user from "../../../services/api/apiUser";
 
 async function getUserProfile(token) {
   try {
-    const res = await service.getUserProfile(token);
-    return res
+    const res = await user.getUserProfile(token);
+    return res;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 }
 
-export default getUserProfile
+export default getUserProfile;

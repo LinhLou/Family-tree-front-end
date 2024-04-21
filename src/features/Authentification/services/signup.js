@@ -1,12 +1,12 @@
-import service from "./api";
+import user from "../../../services/api/apiUser";
 
-async function signup(data){
+async function signup(data) {
   try {
-    const res = await service.signupUser(data);
-    return res
+    const res = await user.signupUser(data);
+    return res;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 }
 
-export default signup
+export default signup;

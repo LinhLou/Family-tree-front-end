@@ -9,7 +9,6 @@ import { useForm,FormProvider } from 'react-hook-form';
 import resetPassword from '../services/resetPassword';
 
 export default function ResetPasswordForm({ token }) {
-  console.log(token)
   const modalServerErrorRef = useRef();
   const modalSuccesRef = useRef();
   const methods = useForm();
