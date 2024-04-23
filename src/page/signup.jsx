@@ -12,7 +12,7 @@ export default function Signup() {
           <SignupForm />
           <div className="d-flex  justify-content-between mt-3">
             <small>Already registered? </small>
-            <Link to="/login" className='link-primary fs-6'><small>Log in</small></Link>
+            <Link to="/login" className='link-primary fs-6'><small role='linkToLogin'>Log in</small></Link>
           </div>
         </div>
       </div>

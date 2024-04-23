@@ -1,5 +1,4 @@
 import { waitFor } from "@testing-library/react";
-import userEvent from '@testing-library/user-event'
 import FormInput from "../FormInput";
 import renderWithReactHookForm from "../../../utils/test-utils/renderWithReactHookForm";
 
@@ -18,8 +17,8 @@ test('should watch input correctly', () => {
 
 
 test('should show correct error message in function of invalidation case', async () => {
-  const user = userEvent.setup()
-  const { getByLabelText, getByText, reactHookFormMethods } = renderWithReactHookForm(
+
+  const { user, getByLabelText, getByText, reactHookFormMethods } = renderWithReactHookForm(
     <FormInput {...{
       type: 'email', id: 'idEmail', label: 'email', name: 'email',
       contraints: {

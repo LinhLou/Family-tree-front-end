@@ -10,6 +10,8 @@ export default function ResetPassword() {
     <div className='container'>
       <div className='row justify-content-center mt-5'>
         <div className='col-sm-8 col-md-6 col-lg-4'>
+          <div className="h2 text-center mb-4">Reset your password</div>
+
           <ResetPasswordForm token={token}/>
         </div>
       </div>
