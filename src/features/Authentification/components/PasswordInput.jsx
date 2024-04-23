@@ -34,7 +34,7 @@ export default function PasswordInput(props) {
         <ErrorMessage
           errors={errors}
           name={props.name}
-          render={({ message }) => <p className='invalid-feedback'>{message}</p>}
+          render={({ message }) => <p className='invalid-feedback' role='error-message'>{message}</p>}
         />
       </>
     )

@@ -8,7 +8,7 @@ const mockAPI = {
   signupUser: async function(){
     return await Promise.reject({
       "status": 400,
-      "message": "password is invalid!"
+      "message": "email is already exist"
     })
   },
   getUserProfile: async function(){
